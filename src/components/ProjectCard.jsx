@@ -8,7 +8,7 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import CustomUnSolidButton from "./CustomUnsolidButton";
+import CustomUnSolidButton from "./CustomUnSolidButton";
 import MockProject from "../assets/images/MockProject.svg";
 import { Link } from "react-router-dom";
 

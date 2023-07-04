@@ -14,6 +14,7 @@ function App() {
       <Header />
       <Box px={["5", "16"]}>
         <Routes>
+          <Route path="/react-live/" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
