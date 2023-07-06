@@ -14,7 +14,11 @@ export default function PreviousCompnies() {
   const [micro, setMicro] = useState(true);
   const [fedex, setfedex] = useState(true);
   return (
-    <Stack direction={["column", "row"]} gap={["0", "80"]} my={5}>
+    <Stack
+      direction={{ base: "column", lg: "row" }}
+      gap={{ base: "0", lg: "80" }}
+      my={5}
+    >
       <Box display={"flex"} justifyContent={"space-between"} w={"full"}>
         <Box
           onMouseEnter={() => {
@@ -23,7 +27,7 @@ export default function PreviousCompnies() {
           onMouseLeave={() => {
             setAirbnb(!airbnb);
           }}
-          w={["150px", "300"]}
+          w={{ base: "150px", lg: "300" }}
           h="100px"
           bgSize={"contain"}
           bgImage={airbnb ? AirBnbColorless : colored_1}
@@ -39,7 +43,7 @@ export default function PreviousCompnies() {
             setMicro(!micro);
           }}
           bgSize={"contain"}
-          w={["150px", "300"]}
+          w={{ base: "150px", lg: "300" }}
           h="100px"
           bgImage={micro ? MicroSoftColorless : colored_3}
           bgRepeat={"no-repeat"}
@@ -55,7 +59,7 @@ export default function PreviousCompnies() {
           onMouseLeave={() => {
             setGoogle(!google);
           }}
-          w={["150px", "300"]}
+          w={{base:"150px", lg:"300"}}
           h="100px"
           bgSize={"contain"}
           bgImage={google ? googleColorless : colored_2}
@@ -70,7 +74,7 @@ export default function PreviousCompnies() {
           onMouseLeave={() => {
             setfedex(!fedex);
           }}
-          w={["150px", "300"]}
+          w={{base:"150px", lg:"300"}}
           h="100px"
           bgSize={"contain"}
           bgImage={fedex ? feedExColorless : colored_4}

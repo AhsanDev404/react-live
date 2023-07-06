@@ -8,13 +8,15 @@ import Projects from "./layout/Projects";
 import ProjectDetail from "./layout/ProjectDetail";
 import { Box } from "@chakra-ui/react";
 
+
 function App() {
+  
+
   return (
     <Router>
       <Header />
-      <Box px={["5", "16"]}>
+      <Box px={{base:"5", lg:"16"}}>
         <Routes>
-          <Route path="/react-live/" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

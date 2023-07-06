@@ -29,12 +29,12 @@ export default function Header() {
 
   return (
     <Box>
-      <HStack shadow={"md"} w={"full"} minH={["12", "16"]} px={["5", "16"]}>
+      <HStack shadow={"md"} w={"full"} minH={{base:"12", md:"16", lg:"16"}} px={{base:"5", lg:"16"}}>
         <Box>
           <Image src={logoSvg} alt="logo" />
         </Box>
         <HStack
-          display={["none", "flex"]}
+          display={{base:"none" , lg:"flex"}}
           w={"full"}
           justifyContent={"flex-end"}
           gap={10}
@@ -69,7 +69,7 @@ export default function Header() {
         </HStack>
 
         <HStack
-          display={["flex", "none"]}
+          display={{base:"flex", lg:"none"}}
           w={"full"}
           justifyContent={"flex-end"}
         >
@@ -87,7 +87,7 @@ export default function Header() {
           shadow="md"
           textAlign={"center"}
           onClick={onToggle}
-          display={["block", "none"]}
+          display={{base:"block", lg:"none"}}
         >
           <LinkBox py={"2"} shadow={"sm"}>
             <Link variant={"unstyled"} as={Link} to="/">

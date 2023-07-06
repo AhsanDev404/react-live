@@ -11,15 +11,20 @@ import {
 } from "@chakra-ui/react";
 import PreviousCompnies from "../components/PreviousCompnies";
 import AboutImage from "../assets/images/AboutImage.svg";
+import { useEffect } from "react";
 export default function About() {
   const { colorMode } = useColorMode();
+  useEffect(()=>{
+    window.scrollTo({ top: "0px"});
+  },[])
   return (
-    <Box minH={"95vh"}>
-      <Box display={["block", "flex"]} alignItems={"center"} gap={"44"} my={5}>
+    <Box >
+      <Box minH={{lg:"85vh"}} display={{base:"block", lg:"flex"}} alignItems={"center"} gap={"44"} mb={10} >
         <Heading
+        mt={10}
           size={"lg"}
           fontWeight={"medium"}
-          textAlign={["center", "left"]}
+          textAlign={{base:"center", lg:"left"}}
         >
           "As an{" "}
           <Text as={"span"} color={"primary.200"}>
@@ -28,11 +33,11 @@ export default function About() {
           , you're not just building apps you're building bridges that connect
           people, empower businesses, and revolutionize the digital landscape."
         </Heading>
-        <Image src={AboutImage} boxSize={"md"} />
+        <Image mx={{base:"auto"}} src={AboutImage} boxSize={"md"} />
       </Box>
 
-      <Box my={5} display={"flex"} gap={5} flexDirection={["column", "row"]}>
-        <Stack textAlign={["center", "left"]}>
+      <Box my={5} display={"flex"} gap={5} flexDirection={{base:"column", lg:"row"}}>
+        <Stack textAlign={{base:"center", lg:"left"}}>
           <Heading
             color={"primary.200"}
             as={"h6"}
@@ -82,7 +87,7 @@ export default function About() {
 
         <Stack direction={"row"} position={"relative"} w={"full"} my={5}>
           <Box
-            display={["none", "block"]}
+            display={{base:"none", lg:"block"}}
             w={1}
             border={"2px"}
             borderColor={"primary.200"}
@@ -100,7 +105,7 @@ export default function About() {
                 sx={{
                   "::before": {
                     content: '""',
-                    display: ["none", "inline-block"],
+                    display: {base:"none", lg:"inline-block"},
                     width: "8px",
                     height: "8px",
                     borderRadius: "50%",
@@ -142,7 +147,7 @@ export default function About() {
                 sx={{
                   "::before": {
                     content: '""',
-                    display: ["none", "inline-block"],
+                    display: {base:"none", lg:"inline-block"},
                     width: "8px",
                     height: "8px",
                     borderRadius: "50%",

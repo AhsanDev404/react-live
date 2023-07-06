@@ -1,10 +1,18 @@
 import {
   Box,
+  Button,
   Card,
   FormControl,
   Heading,
   Image,
   Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Stack,
   Text,
   Textarea,
@@ -13,18 +21,20 @@ import {
 } from "@chakra-ui/react";
 import Address from "../assets/icons/Address.svg";
 import CustomButton from "../components/CustomButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Springs from "../assets/images/springs.svg";
 import Phone_1 from "../assets/images/Phone_1.svg";
 import Emai_1 from "../assets/images/Email_1.svg";
+import { useForm } from "react-hook-form";
+import sendEmail from "../utils/sendEmail";
 
 const CustomCard = ({ image, heading, description }) => (
   <Card
     direction={"row"}
     gap={5}
     alignItems={"center"}
-    py={[8, 12]}
-    m={[0, 5]}
+    py={{base:8, lg:12}}
+    m={{base:0, lg:5}}
     px={10}
     w={"full"}
     borderRadius={"2xl"}
@@ -43,24 +53,35 @@ const CustomCard = ({ image, heading, description }) => (
 );
 
 export default function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [thoughts, setThoughts] = useState("");
+ 
+  const [mailResponse, setMailResponse] = useState(false);
   const { colorMode } = useColorMode();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Thoughts:", thoughts);
-    setEmail("");
-    setThoughts("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+ 
+  useEffect(()=>{
+    window.scrollTo({ top: "0px"});
+  },[])
+  const onSubmit = (data) => {
+    sendEmail(data);
+    setMailResponse("Email Sent Successfully");
+  };
+  const handleCloseModal = () => {
+    setMailResponse(false);
+    reset()
+    
   };
   return (
-    <Box mt={10} minH={"95vh"}>
-      <Heading textAlign={"center"} fontWeight={"medium"} my={10}>
+    <Box >
+     <Stack h={{lg:"80vh"}} justifyContent={"center"} mb={{lg:20}}>
+     <Heading textAlign={"center"} fontWeight={"medium"} my={10}>
         Contact Me
       </Heading>
-      <Stack direction={["column", "row"]}>
+      <Stack direction={{base:"column", lg:"row"}}>
         <CustomCard
           image={Address}
           heading={"Address"}
@@ -77,17 +98,18 @@ export default function Contact() {
           description={"Example@abc.com"}
         />
       </Stack>
+     </Stack>
 
       <Box
         bgColor={colorMode === "light" ? "neutrals.30" : "gray.900"}
         py={5}
         mt={5}
-        mx={["-5", "-16"]}
-        overflow={"hidden"}
-        position={"relative"}
+        mx={{base:"-5", lg:"-16"}}
+       position={"relative"}
+       overflow={"hidden"}
         justifyContent={"center"}
       >
-        <Box mx={["5", "96"]}>
+          <Box mx={{base:"5", lg:"96"}}>
           <Text my={5} color={"neutrals.90"}>
             Send Message
           </Text>
@@ -101,13 +123,21 @@ export default function Contact() {
           >
             Get In Touch
           </Heading>
-          <form onSubmit={handleSubmit}>
-            <VStack spacing={4} pb={5} position={"relative"} zIndex={1}>
+          <form>
+          <Image
+            boxSize={"xl"}
+            src={Springs}
+            position={"absolute"}
+            right={{base:"-44", md:"-72", lg:"-64"}}
+            top={{base:-10, lg:-20}}
+          />
+            <VStack spacing={4} px={{base:"0", lg:"28"}} pb={5}>
+           
               <FormControl id="name">
                 <Input
                   border={"1px"}
                   borderColor={"neutrals.50"}
-                  placeholder="please Enter your Name"
+                  placeholder="Please enter your Name"
                   _placeholder={{
                     fontFamily: "custom",
                     fontStyle: "italic",
@@ -115,16 +145,16 @@ export default function Contact() {
                   }}
                   fontFamily={"custom"}
                   type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  {...register("name", { required: true })}
                   bgColor={"neutrals.0"}
                 />
+                {errors.name && <span>This field is required</span>}
               </FormControl>
               <FormControl id="email">
                 <Input
                   border={"1px"}
                   borderColor={"neutrals.50"}
-                  placeholder="please Enter your Email"
+                  placeholder="Please enter your Email"
                   _placeholder={{
                     fontFamily: "custom",
                     fontStyle: "italic",
@@ -132,14 +162,14 @@ export default function Contact() {
                   }}
                   fontFamily={"custom"}
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  {...register("email", { required: true })}
                   bgColor={"neutrals.0"}
                 />
+                {errors.email && <span>This field is required</span>}
               </FormControl>
               <FormControl id="thoughts">
                 <Textarea
-                  h={["20", "36"]}
+                  h={"36"}
                   border={"1px"}
                   borderColor={"neutrals.50"}
                   placeholder="Describe your thoughts"
@@ -149,31 +179,38 @@ export default function Contact() {
                     color: "neutrals.200",
                   }}
                   fontFamily={"custom"}
-                  value={thoughts}
-                  onChange={(e) => setThoughts(e.target.value)}
+                  {...register("thoughts", { required: true })}
                   bgColor={"neutrals.0"}
                 />
+                {errors.thoughts && <span>This field is required</span>}
               </FormControl>
 
-              <Box
-                display={"flex"}
-                justifyContent={["center", "flex-start"]}
-                w={"full"}
-              >
-                <CustomButton as="submit" title={"Submit"} />
+              <Box display={"flex"} justifyContent={"flex-start"} w={"full"}>
+                <CustomButton
+                  title={"Submit"}
+                  onClickHandle={handleSubmit(onSubmit)}
+                />
               </Box>
             </VStack>
           </form>
+          {mailResponse && (
+        <Modal isOpen={mailResponse} onClose={handleCloseModal}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Email Response</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>{mailResponse}</ModalBody>
+            <ModalFooter>
+              <Button colorScheme="blue" onClick={handleCloseModal}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
         </Box>
-        <Box>
-          <Image
-            boxSize={"xl"}
-            src={Springs}
-            position={"absolute"}
-            right={["-44", "-64"]}
-            top={[-10, -20]}
-          />
-        </Box>
+      
+        
       </Box>
     </Box>
   );

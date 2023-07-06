@@ -1,12 +1,12 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import userReducer from "./slice/userSlice";
-
-const rootReducer = combineReducers({
-  user: userReducer,
-});
+import { configureStore } from '@reduxjs/toolkit';
+import projectsReducer from './projectSlice';
+import categoryReducer from "./categorySlice"
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    projects: projectsReducer,
+    category:categoryReducer,
+  },
 });
 
 export default store;

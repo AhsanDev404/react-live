@@ -1,7 +1,14 @@
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, Link } from "@chakra-ui/react";
 
-export default function CustomIconButton({ IconOption }) {
+export default function CustomIconButton({ IconOption , type , link }) {
+  if(type=="email"){
+    link = `mailto:${link}`
+  }else if(type=="whatsapp"){
+    link=`https://wa.me/${link}`
+  }
+  
   return (
+    <Link href={link} isExternal>
     <IconButton
       _hover={{
         bgColor: "primary.200",
@@ -13,8 +20,9 @@ export default function CustomIconButton({ IconOption }) {
       borderRadius={"full"}
       display={"flex"}
       textAlign={"center"}
-      fontSize={["xl", "2xl"]}
+      fontSize={{base:"xl", lg:"2xl"}}
       icon={IconOption}
     />
+    </Link>
   );
 }

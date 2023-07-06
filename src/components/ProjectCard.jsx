@@ -11,50 +11,62 @@ import {
 import CustomUnSolidButton from "./CustomUnSolidButton";
 import MockProject from "../assets/images/MockProject.svg";
 import { Link } from "react-router-dom";
-
-export default function ProjectCard({ odd }) {
+export default function ProjectCard({
+  id,
+  odd = false,
+  image = MockProject,
+  title = "Medesto - Perigon Health 360",
+  description = "The Medesto App works with the Medesto Dispenser to track doses taken or missed and provides important information about medications, including side effects and potentially harmful drug interactions.",
+  category = "Healthcare",
+}) {
   const { colorMode } = useColorMode();
   return (
     <Stack
-      direction={["column", odd ? "row-reverse" : "row"]}
-      gap={10}
-      mx={[0, 20]}
-      my={[10, 20]}
+      direction={{ base: "column", lg: odd ? "row-reverse" : "row" }}
+      gap={"16"}
+      mx={{ base: 0, lg: 20 }}
+      my={{ base: 10, lg: 20 }}
       _hover={{ cursor: "pointer" }}
+      alignItems={"center"}
     >
       <Card
         bgColor={colorMode == "light" ? "primary.50" : "primary.50"}
-        px={5}
-        py={10}
+       
+ 
+        borderRadius={"3xl"}
       >
         <CardBody display={"flex"}>
-          <Image width={"6xl"} src={MockProject} />
+          <Image width={{base:"xl",lg:"2xl"}}  src={image} />
         </CardBody>
       </Card>
-      <Stack my={[0, 20]} gap={8} textAlign={["center", "left"]}>
+      <Stack
+        my={{ base: 0, lg: 20 }}
+        gap={8}
+        textAlign={{ base: "center", lg: "left" }}
+        w={{base:"full",lg:"60%"}}
+      >
         <Heading
           as={"h6"}
           fontWeight={"medium"}
           color={"primary.200"}
           size={"md"}
         >
-          Medesto - Perigon Health 360{" "}
+          {title}
         </Heading>
         <Text
           fontSize={"xl"}
           fontFamily={"custom"}
+          noOfLines={3}
           color={colorMode == "light" ? "neutrals.200" : "neutrals.0"}
         >
-          The Medesto App works with the Medesto Dispenser to track doses taken
-          or missed and provides important information about medications,
-          including side effects and potentially harmful drug interactions.
+          {description}
         </Text>
         <Text color={"primary.200"} fontWeight={"semibold"} fontSize={"sm"}>
-          Healthcare
+          {category}
         </Text>
-        <Box display={["flex", "block"]} justifyContent={"center"}>
-        <Link to={'/project/123'}>
-          <CustomUnSolidButton />
+        <Box display={{ base: "flex", lg: "block" }} justifyContent={"center"}>
+          <Link to={`/project/${id}`}>
+            <CustomUnSolidButton />
           </Link>
         </Box>
       </Stack>

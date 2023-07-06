@@ -14,8 +14,8 @@ export default function Footer() {
       bgSize="cover"
       bgPosition="center"
       bgRepeat="no-repeat"
-      py={["5", "10"]}
-      px={["5", "16"]}
+      py={{base:"5", lg:"10"}}
+      px={{base:"5", lg:"16"}}
     >
       <Card
         px={5}
@@ -25,24 +25,24 @@ export default function Footer() {
         justifyContent={"space-between"}
         alignItems={"center"}
       >
-        <Stack direction={["column", "row  "]} justifyContent={"space-evenly"}>
+        <Stack direction={{base:"column", lg:"row  "}} justifyContent={"space-evenly"}>
           <HStack>
             <Image src={locationIcon} />
-            <Text fontSize={["sm", "md"]}>123-A abcd street city, Country</Text>
+            <Text fontSize={{base:"sm", lg:"md"}}>123-A abcd street city, Country</Text>
           </HStack>
           <HStack>
             <Image src={phoneIcon} />
-            <Text fontSize={["sm", "md"]}>123-A abcd street city, Country</Text>
+            <Text fontSize={{base:"sm", lg:"md"}}>123-A abcd street city, Country</Text>
           </HStack>
           <HStack>
             <Image src={mailIcon} />
-            <Text fontSize={["sm", "md"]}>123-A abcd street city, Country</Text>
+            <Text fontSize={{base:"sm", lg:"md"}}>123-A abcd street city, Country</Text>
           </HStack>
         </Stack>
-        <Stack gap={["3", "5"]} direction={["column", "row"]}>
-          <CustomIconButton IconOption={<IoIosMail />} />
-          <CustomIconButton IconOption={<FaLinkedinIn />} />
-          <CustomIconButton IconOption={<BsWhatsapp />} />
+        <Stack gap={{base:"3", lg:"5"}} direction={["column", "row"]}>
+          <CustomIconButton IconOption={<IoIosMail />} type={"email"} link={"tahirzahoor456@gmail.com"} />
+          <CustomIconButton IconOption={<FaLinkedinIn/>} type={"linkedin"} link={"https://www.linkedin.com/in/tahir-zahoor-228499124/"}/>
+          <CustomIconButton IconOption={<BsWhatsapp />} type={"whatsapp"} link={"03044040187"}/>
         </Stack>
       </Card>
     </Box>
