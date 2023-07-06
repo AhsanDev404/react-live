@@ -17,7 +17,7 @@ function App() {
       <Header />
       <Box px={{base:"5", lg:"16"}}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/projects" element={<Projects />} />
